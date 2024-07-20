@@ -1,0 +1,7 @@
+{
+  "name": "warhamster",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
