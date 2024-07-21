@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Welcome, {{ user?.userName }}</ion-card-title>
+      <ion-card-subtitle>Here's a quick overview of your activities</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Your Army Lists</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let armyList of armyLists">
+          {{ armyList.name }}
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" routerLink="/army-lists">View All Army Lists</ion-button>
+      <ion-button expand="full" routerLink="/create-army-list">Create New Army List</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Your Matches</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let match of matches">
+          {{ match.details }}
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" routerLink="/matches">View All Matches</ion-button>
+      <ion-button expand="full" routerLink="/create-match">Create New Match</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Your Tournaments</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let tournament of tournaments">
+          {{ tournament.name }}
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" routerLink="/tournaments">View All Tournaments</ion-button>
+      <ion-button expand="full" routerLink="/create-tournament">Create New Tournament</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

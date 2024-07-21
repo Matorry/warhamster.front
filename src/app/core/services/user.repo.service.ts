@@ -7,7 +7,7 @@ import { User, UserCreateDto, UserUpdateDto } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserRepoService {
-  private apiUrl = 'http://localhost:7373/users'
+  private apiUrl = 'http://localhost:7373/user'
 
   constructor(private http: HttpClient) { }
 

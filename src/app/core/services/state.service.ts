@@ -37,7 +37,7 @@ export class StateService {
     const currentPayload = this.jwtDecode(token) as { id: string, role: string }
     this.userRepo.getUserById(currentPayload.id).subscribe({
       next: (user) => {
-        this.state$.next({ ...this.state$.value, currentUser: user })
+        this.state$.next({ token, currentUser: user })
       },
       error: (error: Error) => { console.error(error.message) },
       complete: () => { console.log("Login process complete") }

@@ -31,7 +31,7 @@ export class LoginPage {
           position: 'top',
         });
         toast.present();
-        this.router.navigate(['/user-list']);
+        this.router.navigate(['/dashboard']);
       },
       error: async (error: Error) => {
         const toast = await this.toastController.create({
