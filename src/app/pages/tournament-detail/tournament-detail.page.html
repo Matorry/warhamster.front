@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ tournament?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="tournament">
+    <ion-card-header>
+      <ion-card-title>{{ tournament.name }}</ion-card-title>
+      <ion-card-subtitle>{{ tournament.startDate | date }} - {{ tournament.endDate | date }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ tournament.description }}</p>
+      <p>Result: {{ tournament.result }}</p>
+      <ion-button expand="full" (click)="editTournament()">Edit</ion-button>
+      <ion-button color="danger" expand="full" (click)="deleteTournament()">Delete</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

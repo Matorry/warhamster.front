@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ armyList?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="armyList">
+    <ion-card-header>
+      <ion-card-title>{{ armyList.name }}</ion-card-title>
+      <ion-card-subtitle>{{ armyList.faction }} - {{ armyList.subFaction }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ armyList.roster }}</p>
+      <ion-button expand="full" (click)="editArmyList()">Edit</ion-button>
+      <ion-button color="danger" expand="full" (click)="deleteArmyList()">Delete</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

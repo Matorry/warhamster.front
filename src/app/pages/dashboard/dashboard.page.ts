@@ -29,27 +29,35 @@ export class DashboardPage implements OnInit {
   ngOnInit() {
     this.stateService.getState().subscribe(state => {
       this.user = state.currentUser;
-      this.loadArmyLists();
-      this.loadMatches();
-      this.loadTournaments();
+      if (this.user) {
+        this.loadArmyLists();
+        this.loadMatches();
+        this.loadTournaments();
+      }
     });
   }
 
   loadArmyLists() {
-    this.armyListRepoService.getArmyListsByOwner(this.user.id).subscribe(data => {
-      this.armyLists = data;
-    });
+    if (this.user) {
+      this.armyListRepoService.getArmyListsByOwner(this.user.id).subscribe(data => {
+        this.armyLists = data;
+      });
+    }
   }
 
   loadMatches() {
-    this.matchRepoService.getMatchsByParticipant(this.user.id).subscribe(data => {
-      this.matches = data;
-    });
+    if (this.user) {
+      this.matchRepoService.getMatchsByParticipant(this.user.id).subscribe(data => {
+        this.matches = data;
+      });
+    }
   }
 
   loadTournaments() {
-    this.tournamentRepoService.getTournamentsByParticipant(this.user.id).subscribe(data => {
-      this.tournaments = data;
-    });
+    if (this.user) {
+      this.tournamentRepoService.getTournamentsByParticipant(this.user.id).subscribe(data => {
+        this.tournaments = data;
+      });
+    }
   }
 }

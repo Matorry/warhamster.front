@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Match Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="match">
+    <ion-card-header>
+      <ion-card-title>{{ match.details }}</ion-card-title>
+      <ion-card-subtitle>{{ match.date | date }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Result:</strong> {{ match.result }}</p>
+      <p><strong>Details:</strong> {{ match.details }}</p>
+      <ion-list>
+        <ion-item *ngFor="let participant of match.participants">
+          <ion-label>
+            <h2>{{ participant.user.userName }}</h2>
+            <p>Army List: {{ participant.army.name }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" (click)="editMatch()">Edit</ion-button>
+      <ion-button color="danger" expand="full" (click)="deleteMatch()">Delete</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
