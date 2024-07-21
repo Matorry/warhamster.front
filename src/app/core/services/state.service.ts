@@ -1,5 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user.model';
@@ -20,7 +19,7 @@ const initialState: State = {
 })
 export class StateService {
   private userRepo = inject(UserRepoService);
-  private state$ = new BehaviorSubject<State>(initialState);
+  private state$ = new BehaviorSubject<State>(this.loadState());
 
   getState(): Observable<State> {
     return this.state$.asObservable();
@@ -30,36 +29,22 @@ export class StateService {
     return this.state$.value;
   }
 
-  setLogin(token: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      localStorage.setItem('authToken', token);
-      const currentPayload = jwtDecode(token) as { id: string; role: string };
-      this.userRepo.getUserById(currentPayload.id).subscribe({
-        next: (user) => {
-          this.state$.next({ token, currentUser: user });
-          resolve();
-        },
-        error: (error: Error) => {
-          console.error(error.message);
-          reject(error);
-        }
-      });
+  setLogin(token: string): void {
+    localStorage.setItem('authToken', token);
+    const currentPayload = jwtDecode(token) as { id: string; role: string };
+    this.userRepo.getUserById(currentPayload.id).subscribe({
+      next: (user) => {
+        this.state$.next({ token, currentUser: user });
+      },
+      error: (error: Error) => {
+        console.error(error.message);
+      }
     });
   }
 
   setLogout() {
     localStorage.removeItem('authToken');
     this.state$.next(initialState);
-  }
-
-  checkLogin() {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      this.setLogin(token).catch(err => {
-        console.error('Error during login check:', err);
-        this.setLogout();
-      });
-    }
   }
 
   private loadState(): State {
@@ -74,7 +59,6 @@ export class StateService {
         },
         error: (error: Error) => {
           console.error(error.message);
-          this.setLogout();
         }
       });
       return { token, currentUser };

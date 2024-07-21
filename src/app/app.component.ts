@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { StateService } from './core/services/state.service';
@@ -10,10 +10,14 @@ import { StateService } from './core/services/state.service';
   standalone: true,
   imports: [CommonModule, RouterModule, IonApp, IonRouterOutlet],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   private stateService = inject(StateService);
 
-  ngOnInit() {
-    this.stateService.checkLogin();
+  constructor() {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      this.stateService.setLogin(token);
+    }
   }
+
 }
